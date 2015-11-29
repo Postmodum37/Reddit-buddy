@@ -13,6 +13,7 @@ namespace Reddit_buddy
 {
     public partial class Form1 : Form
     {
+        public Reddit reddit = new Reddit();
         public Form1()
         {
             InitializeComponent();
@@ -21,6 +22,9 @@ namespace Reddit_buddy
             this.FormBorderStyle = FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
+
+            textBox1.AppendText("scriverry");
+            textBox2.AppendText("postmodum3647");
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -28,13 +32,14 @@ namespace Reddit_buddy
             if ((textBox1.Text == "") || (textBox2.Text == ""))
             {
                 MessageBox.Show("One or more input fields are empty.", "Wrong credentials",  MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            } else
+            }
+            else
             {
                 try
                 {
-                    var reddit = new Reddit();
                     var user = reddit.LogIn(textBox1.Text, textBox2.Text);
-                    Application.Run(new Form2());
+                    this.DialogResult = DialogResult.OK;
+                    this.Close();
                 }
                 catch (Exception ex)
                 {
