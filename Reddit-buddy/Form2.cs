@@ -122,7 +122,27 @@ namespace Reddit_buddy
             foreach (var post in sub.Hot.Take(15))
             {
                 posts.Add(post);
-                list.Items.Add(new ListViewItem(new[] { post.Title, post.Score.ToString() }));
+                list.Items.Add(new ListViewItem(new[] { post.Title, post.SubredditName, post.Score.ToString() }));
+            }
+        }
+
+        private void Form2_ResizeEnd(Object sender, EventArgs e)
+        {
+            try
+            {
+                listView1.Columns[0].Width = (listView1.Width / 10) * 8;
+                listView1.Columns[1].AutoResize(ColumnHeaderAutoResizeStyle.HeaderSize);
+                listView1.Columns[2].AutoResize(ColumnHeaderAutoResizeStyle.HeaderSize);
+
+                listView2.Columns[0].Width = (listView2.Width / 9) * 8;
+                listView2.Columns[1].AutoResize(ColumnHeaderAutoResizeStyle.HeaderSize);
+
+                listView3.Columns[0].Width = (listView3.Width / 9) * 8;
+                listView3.Columns[1].AutoResize(ColumnHeaderAutoResizeStyle.HeaderSize);
+            }
+            catch (Exception)
+            {
+                throw;
             }
         }
     }
