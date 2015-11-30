@@ -27,11 +27,49 @@ namespace Reddit_buddy
             textBox2.AppendText("postmodum3647");
         }
 
+        private void Form1_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                validation();
+
+                e.Handled = true;
+                e.SuppressKeyPress = true;
+            }
+        }
+
+        private void textbox1_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                validation();
+
+                e.Handled = true;
+                e.SuppressKeyPress = true;
+            }
+        }
+
+        private void textbox2_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                validation();
+
+                e.Handled = true;
+                e.SuppressKeyPress = true;
+            }
+        }
+
         private void button1_Click(object sender, EventArgs e)
+        {
+            validation();
+        }
+
+        private void validation()
         {
             if ((textBox1.Text == "") || (textBox2.Text == ""))
             {
-                MessageBox.Show("One or more input fields are empty.", "Wrong credentials",  MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("One or more input fields are empty.", "Wrong credentials", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
             else
             {

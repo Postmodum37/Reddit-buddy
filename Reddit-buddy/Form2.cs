@@ -23,10 +23,13 @@ namespace Reddit_buddy
         List<Post> bottom_left_posts = new List<Post>();
         List<Post> bottom_right_posts = new List<Post>();
 
+        Reddit reddit;
+
 
         public Form2(Reddit reddit)
         {
             InitializeComponent();
+            this.reddit = reddit;
             default_subredit = reddit.RSlashAll;
             createMainList(listView1, default_subredit, default_subreddit_posts);
 
@@ -143,6 +146,82 @@ namespace Reddit_buddy
             catch (Exception)
             {
                 throw;
+            }
+        }
+
+        private void textBox1_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                try
+                {
+                    bottom_left_posts.Clear();
+                    listView2.Items.Clear();
+                    bottom_left_subreddit = reddit.GetSubreddit("/r/" + textBox1.Text);
+                    foreach (var post in bottom_left_subreddit.Hot.Take(15))
+                    {
+                        bottom_left_posts.Add(post);
+                        listView2.Items.Add(new ListViewItem(new[] { post.Title, post.Score.ToString() }));
+                    }
+                    label1.Text = "/r/" + bottom_left_subreddit.Name;
+                    textBox1.Clear();
+                }
+                catch (Exception ex)
+                {
+                    bottom_left_posts.Clear();
+                    listView2.Items.Clear();
+                    bottom_left_subreddit = reddit.GetSubreddit("/r/programming");
+                    foreach (var post in bottom_left_subreddit.Hot.Take(15))
+                    {
+                        bottom_left_posts.Add(post);
+                        listView2.Items.Add(new ListViewItem(new[] { post.Title, post.Score.ToString() }));
+                    }
+                    label1.Text = "/r/" + bottom_left_subreddit.Name;
+                    textBox1.Clear();
+
+                    MessageBox.Show(ex.ToString(), "List update failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }              
+            }
+        }
+
+        private void textBox2_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                try
+                {
+                    bottom_right_posts.Clear();
+                    listView3.Items.Clear();
+                    bottom_right_subreddit = reddit.GetSubreddit("/r/" + textBox2.Text);
+                    foreach (var post in bottom_right_subreddit.Hot.Take(15))
+                    {
+                        bottom_right_posts.Add(post);
+                        listView3.Items.Add(new ListViewItem(new[] { post.Title, post.Score.ToString() }));
+                    }
+                    label2.Text = "/r/" + bottom_right_subreddit.Name;
+                    textBox2.Clear();
+
+                    e.Handled = true;
+                    e.SuppressKeyPress = true;
+                }
+                catch (Exception ex)
+                {
+                    bottom_right_posts.Clear();
+                    listView3.Items.Clear();
+                    bottom_right_subreddit = reddit.GetSubreddit("/r/linux");
+                    foreach (var post in bottom_right_subreddit.Hot.Take(15))
+                    {
+                        bottom_right_posts.Add(post);
+                        listView3.Items.Add(new ListViewItem(new[] { post.Title, post.Score.ToString() }));
+                    }
+                    label2.Text = "/r/" + bottom_right_subreddit.Name;
+                    textBox2.Clear();
+
+                    MessageBox.Show(ex.ToString(), "List update failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                    e.Handled = true;
+                    e.SuppressKeyPress = true;
+                }
             }
         }
     }
