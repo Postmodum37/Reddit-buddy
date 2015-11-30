@@ -28,43 +28,13 @@ namespace Reddit_buddy
         {
             InitializeComponent();
             default_subredit = reddit.RSlashAll;
-            label1.Text = "/r/" + default_subredit.Name;
-            listView1.View = View.Details;
-            listView1.Columns.Add("Title", - 2, HorizontalAlignment.Left);
-            listView1.Columns.Add("Subreddit", -2, HorizontalAlignment.Left);
-            listView1.Columns.Add("Score", -2, HorizontalAlignment.Left);
-            listView1.Columns[0].Width = (listView1.Width / 7) * 6;
-            listView1.Columns[1].AutoResize(ColumnHeaderAutoResizeStyle.HeaderSize);
-            listView1.Columns[2].AutoResize(ColumnHeaderAutoResizeStyle.HeaderSize);
-            foreach (var post in default_subredit.Hot.Take(15))
-            {
-                default_subreddit_posts.Add(post);
-                listView1.Items.Add(new ListViewItem(new[] { post.Title, post.SubredditName, post.Score.ToString() }));
-            }
+            createMainList(listView1, default_subredit, default_subreddit_posts);
 
             bottom_left_subreddit = reddit.GetSubreddit("/r/programming");
-            listView2.View = View.Details;
-            listView2.Columns.Add("Title", -2, HorizontalAlignment.Left);
-            listView2.Columns.Add("Score", -2, HorizontalAlignment.Left);
-            listView2.Columns[0].Width = (listView2.Width / 9) * 8;
-            listView2.Columns[1].AutoResize(ColumnHeaderAutoResizeStyle.HeaderSize);
-            foreach (var post in bottom_left_subreddit.Hot.Take(15))
-            {
-                bottom_left_posts.Add(post);
-                listView2.Items.Add(new ListViewItem(new[] { post.Title, post.Score.ToString() }));
-            }
+            createSideList(listView2, bottom_left_subreddit, bottom_left_posts, label1);
 
             bottom_right_subreddit = reddit.GetSubreddit("/r/linux");
-            listView3.View = View.Details;
-            listView3.Columns.Add("Title", -2, HorizontalAlignment.Left);
-            listView3.Columns.Add("Score", -2, HorizontalAlignment.Left);
-            listView3.Columns[0].Width = (listView3.Width / 9) * 8;
-            listView3.Columns[1].AutoResize(ColumnHeaderAutoResizeStyle.HeaderSize);
-            foreach (var post in bottom_right_subreddit.Hot.Take(15))
-            {
-                bottom_right_posts.Add(post);
-                listView3.Items.Add(new ListViewItem(new[] { post.Title, post.Score.ToString() }));
-            }
+            createSideList(listView3, bottom_right_subreddit, bottom_right_posts, label2);
 
         }
 
@@ -91,7 +61,7 @@ namespace Reddit_buddy
         {
             try
             {
-                var firstSelectedItem = listView1.SelectedItems[0].Text;
+                var firstSelectedItem = listView2.SelectedItems[0].Text;
                 foreach (var post in bottom_left_posts)
                 {
                     if (post.Title == firstSelectedItem)
@@ -110,7 +80,7 @@ namespace Reddit_buddy
         {
             try
             {
-                var firstSelectedItem = listView1.SelectedItems[0].Text;
+                var firstSelectedItem = listView3.SelectedItems[0].Text;
                 foreach (var post in bottom_right_posts)
                 {
                     if (post.Title == firstSelectedItem)
@@ -122,6 +92,37 @@ namespace Reddit_buddy
             catch (Exception ex)
             {
                 MessageBox.Show(ex.ToString(), "Link opening failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void createSideList(ListView list, Subreddit sub, List<Post> posts, Label label)
+        {
+            list.View = View.Details;
+            label.Text = "/r/" + sub.Name;
+            list.Columns.Add("Title", -2, HorizontalAlignment.Left);
+            list.Columns.Add("Score", -2, HorizontalAlignment.Left);
+            list.Columns[0].Width = (list.Width / 9) * 8;
+            list.Columns[1].AutoResize(ColumnHeaderAutoResizeStyle.HeaderSize);
+            foreach (var post in sub.Hot.Take(15))
+            {
+                posts.Add(post);
+                list.Items.Add(new ListViewItem(new[] { post.Title, post.Score.ToString() }));
+            }
+        }
+
+        private void createMainList(ListView list, Subreddit sub, List<Post> posts)
+        {
+            list.View = View.Details;
+            list.Columns.Add("Title", -2, HorizontalAlignment.Left);
+            list.Columns.Add("Subreddit", -2, HorizontalAlignment.Left);
+            list.Columns.Add("Score", -2, HorizontalAlignment.Left);
+            list.Columns[0].Width = (list.Width / 7) * 6;
+            list.Columns[1].AutoResize(ColumnHeaderAutoResizeStyle.HeaderSize);
+            list.Columns[2].AutoResize(ColumnHeaderAutoResizeStyle.HeaderSize);
+            foreach (var post in sub.Hot.Take(15))
+            {
+                posts.Add(post);
+                list.Items.Add(new ListViewItem(new[] { post.Title, post.Score.ToString() }));
             }
         }
     }

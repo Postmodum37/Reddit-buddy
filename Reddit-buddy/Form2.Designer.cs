@@ -32,14 +32,13 @@
             this.listView1 = new System.Windows.Forms.ListView();
             this.listView2 = new System.Windows.Forms.ListView();
             this.listView3 = new System.Windows.Forms.ListView();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.panel1.SuspendLayout();
+            this.label2 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(63, 32);
+            this.label1.Location = new System.Drawing.Point(12, 278);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(35, 13);
             this.label1.TabIndex = 1;
@@ -49,6 +48,8 @@
             // 
             this.listView1.Activation = System.Windows.Forms.ItemActivation.OneClick;
             this.listView1.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.listView1.HotTracking = true;
+            this.listView1.HoverSelection = true;
             this.listView1.Location = new System.Drawing.Point(183, 5);
             this.listView1.Name = "listView1";
             this.listView1.Size = new System.Drawing.Size(712, 286);
@@ -59,6 +60,7 @@
             // 
             // listView2
             // 
+            this.listView2.Activation = System.Windows.Forms.ItemActivation.OneClick;
             this.listView2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.listView2.Location = new System.Drawing.Point(540, 297);
             this.listView2.Name = "listView2";
@@ -66,9 +68,11 @@
             this.listView2.TabIndex = 3;
             this.listView2.UseCompatibleStateImageBehavior = false;
             this.listView2.View = System.Windows.Forms.View.List;
+            this.listView2.Click += new System.EventHandler(this.listView2_Click);
             // 
             // listView3
             // 
+            this.listView3.Activation = System.Windows.Forms.ItemActivation.OneClick;
             this.listView3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.listView3.Location = new System.Drawing.Point(12, 297);
             this.listView3.Name = "listView3";
@@ -76,29 +80,31 @@
             this.listView3.TabIndex = 4;
             this.listView3.UseCompatibleStateImageBehavior = false;
             this.listView3.View = System.Windows.Forms.View.List;
+            this.listView3.Click += new System.EventHandler(this.listView3_Click);
             // 
-            // panel1
+            // label2
             // 
-            this.panel1.Controls.Add(this.label1);
-            this.panel1.Location = new System.Drawing.Point(12, 12);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(133, 225);
-            this.panel1.TabIndex = 5;
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(1032, 278);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(35, 13);
+            this.label2.TabIndex = 5;
+            this.label2.Text = "label2";
             // 
             // Form2
             // 
             this.AutoSize = true;
             this.ClientSize = new System.Drawing.Size(1079, 638);
-            this.Controls.Add(this.listView3);
-            this.Controls.Add(this.panel1);
-            this.Controls.Add(this.listView1);
             this.Controls.Add(this.listView2);
-            this.MaximumSize = new System.Drawing.Size(1190, 701);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.listView3);
+            this.Controls.Add(this.listView1);
+            this.MaximumSize = new System.Drawing.Size(1100, 701);
             this.MinimumSize = new System.Drawing.Size(1095, 677);
             this.Name = "Form2";
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -107,6 +113,6 @@
         private System.Windows.Forms.ListView listView1;
         private System.Windows.Forms.ListView listView2;
         private System.Windows.Forms.ListView listView3;
-        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Label label2;
     }
 }
