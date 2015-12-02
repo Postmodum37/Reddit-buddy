@@ -324,5 +324,40 @@ namespace Reddit_buddy
                 }
             }
         }
+
+        private void refreshListWithNewestPosts(ListView view, Subreddit sub, List<Post> posts)
+        {
+            view.Items.Clear();
+            posts.Clear();
+            foreach (var post in sub.Hot.Take(15))
+            {
+                posts.Add(post);
+                view.Items.Add(new ListViewItem(new[] { post.Title, post.Score.ToString() }));
+            }
+        }
+
+        private void refreshToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            refreshListWithNewestPosts(listView1, default_subredit, default_subreddit_posts);
+            refreshListWithNewestPosts(listView2, bottom_left_subreddit, bottom_left_posts);
+            refreshListWithNewestPosts(listView3, bottom_right_subreddit, bottom_right_posts);
+        }
+
+        private void logOutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Application.Restart();
+        }
+
+        private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Form frmAbout = new Form3();
+            frmAbout.ShowDialog();
+        }
+
+        private void tutorialToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Form frmTutorial = new Form4();
+            frmTutorial.ShowDialog();
+        }
     }
 }
