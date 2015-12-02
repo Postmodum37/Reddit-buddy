@@ -38,7 +38,7 @@ namespace Reddit_buddy
             InitializeComponent();
             radioButton1.Checked = true;
             this.reddit = reddit;
-            default_subredit = reddit.RSlashAll;
+            default_subredit = reddit.FrontPage;
             createMainList(listView1, default_subredit, default_subreddit_posts);
 
             bottom_left_subreddit = reddit.GetSubreddit("/r/programming");
@@ -46,6 +46,8 @@ namespace Reddit_buddy
 
             bottom_right_subreddit = reddit.GetSubreddit("/r/linux");
             createSideList(listView3, bottom_right_subreddit, bottom_right_posts, label2);
+
+            updateStatusBarLabels();
 
         }
 
@@ -150,6 +152,7 @@ namespace Reddit_buddy
 
                 listView3.Columns[0].Width = (listView3.Width / 9) * 8;
                 listView3.Columns[1].AutoResize(ColumnHeaderAutoResizeStyle.HeaderSize);
+
             }
             catch (Exception)
             {
@@ -161,8 +164,8 @@ namespace Reddit_buddy
         {
             if (e.KeyCode == Keys.Enter)
             {
-                updateListviewWithNewSubreddit(listView2, bottom_left_subreddit, bottom_left_posts, textBox1, label1, defaultSub: "programming");
-
+                updateListviewWithNewSubreddit(listView2, ref bottom_left_subreddit, ref bottom_left_posts, textBox1, label1, defaultSub: "programming");
+                updateStatusBarLabels();
                 e.Handled = true;
                 e.SuppressKeyPress = true;        
             }
@@ -172,14 +175,14 @@ namespace Reddit_buddy
         {
             if (e.KeyCode == Keys.Enter)
             {
-                updateListviewWithNewSubreddit(listView3, bottom_right_subreddit, bottom_right_posts, textBox2, label2, defaultSub: "linux");
-
+                updateListviewWithNewSubreddit(listView3, ref bottom_right_subreddit, ref bottom_right_posts, textBox2, label2, defaultSub: "linux");
+                updateStatusBarLabels();
                 e.Handled = true;
                 e.SuppressKeyPress = true;
             }
         }
 
-        private void updateListviewWithRandomSubreddit(ListView view, Subreddit sub, List<Post> posts, TextBox textBox, Label label)
+        private void updateListviewWithRandomSubreddit(ListView view, ref Subreddit sub, ref List<Post> posts, TextBox textBox, Label label)
         {
             posts.Clear();
             view.Items.Clear();
@@ -194,7 +197,7 @@ namespace Reddit_buddy
         }
 
 
-        private void updateListviewWithNewSubreddit(ListView view, Subreddit sub, List<Post> posts, TextBox textBox, Label label, string defaultSub = "programming")
+        private void updateListviewWithNewSubreddit(ListView view, ref Subreddit sub, ref List<Post> posts, TextBox textBox, Label label, string defaultSub = "programming")
         {
             try
             {
@@ -229,12 +232,14 @@ namespace Reddit_buddy
 
         private void button1_Click(object sender, EventArgs e)
         {
-            updateListviewWithRandomSubreddit(listView2, bottom_left_subreddit, bottom_left_posts, textBox1, label1);
+            updateListviewWithRandomSubreddit(listView2, ref bottom_left_subreddit, ref bottom_left_posts, textBox1, label1);
+            updateStatusBarLabels();
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            updateListviewWithRandomSubreddit(listView3, bottom_right_subreddit, bottom_right_posts, textBox2, label2);
+            updateListviewWithRandomSubreddit(listView3, ref bottom_right_subreddit, ref bottom_right_posts, textBox2, label2);
+            updateStatusBarLabels();
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -325,22 +330,31 @@ namespace Reddit_buddy
             }
         }
 
-        private void refreshListWithNewestPosts(ListView view, Subreddit sub, List<Post> posts)
+        private void refreshListWithNewestPosts(ListView view, Subreddit sub,  ref List<Post> posts)
         {
             view.Items.Clear();
             posts.Clear();
+            Debug.WriteLine(sub);
             foreach (var post in sub.Hot.Take(15))
             {
                 posts.Add(post);
-                view.Items.Add(new ListViewItem(new[] { post.Title, post.Score.ToString() }));
+                if (sub.ToString() == "/r/Front Page")
+                {
+                    view.Items.Add(new ListViewItem(new[] { post.Title, post.SubredditName, post.Score.ToString() }));
+                }
+                else
+                {
+                    view.Items.Add(new ListViewItem(new[] { post.Title, post.Score.ToString() }));
+                }
             }
+            updateStatusBarLabels();
         }
 
         private void refreshToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            refreshListWithNewestPosts(listView1, default_subredit, default_subreddit_posts);
-            refreshListWithNewestPosts(listView2, bottom_left_subreddit, bottom_left_posts);
-            refreshListWithNewestPosts(listView3, bottom_right_subreddit, bottom_right_posts);
+            refreshListWithNewestPosts(listView1, default_subredit, ref default_subreddit_posts);
+            refreshListWithNewestPosts(listView2, bottom_left_subreddit, ref bottom_left_posts);
+            refreshListWithNewestPosts(listView3, bottom_right_subreddit, ref bottom_right_posts);
         }
 
         private void logOutToolStripMenuItem_Click(object sender, EventArgs e)
@@ -358,6 +372,17 @@ namespace Reddit_buddy
         {
             Form frmTutorial = new Form4();
             frmTutorial.ShowDialog();
+        }
+
+        private void updateStatusBarLabels()
+        {
+            int highest_default_subreddit_post = default_subreddit_posts.Max(x => x.Score);
+            int highest_bottom_left_post = bottom_left_posts.Max(x => x.Score);
+            int highest_bottom_right_post = bottom_right_posts.Max(x => x.Score);
+
+            toolStripStatusLabel1.Text = "Highest Top-Middle link score: " + highest_default_subreddit_post;
+            toolStripStatusLabel2.Text = "Highest Bottom-Left link score: " + highest_bottom_left_post;
+            toolStripStatusLabel3.Text = "Highest Bottom-Right link score: " + highest_bottom_right_post;
         }
     }
 }

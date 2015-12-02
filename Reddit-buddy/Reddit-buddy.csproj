@@ -37,24 +37,12 @@
       <HintPath>..\packages\HtmlAgilityPack.1.4.9\lib\Net45\HtmlAgilityPack.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="ListViewPrinter, Version=2.5.0.21564, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\ObjectListView.2.7.1\lib\ListViewPrinter.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="Newtonsoft.Json, Version=7.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.7.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="ObjectListView, Version=2.7.0.20263, Culture=neutral, PublicKeyToken=b1c5bf581481bcd4, processorArchitecture=MSIL">
-      <HintPath>..\packages\ObjectListView.2.7.1\lib\ObjectListView.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="RedditSharp, Version=1.0.20.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\RedditSharp.1.0.20\lib\RedditSharp.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="SparkleLibrary, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\ObjectListView.2.7.1\lib\SparkleLibrary.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
