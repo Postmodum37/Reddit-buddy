@@ -16,3 +16,5 @@ c:\users\tomno\documents\visual studio 2015\Projects\Reddit-buddy\Reddit-buddy\o
 c:\users\tomno\documents\visual studio 2015\Projects\Reddit-buddy\Reddit-buddy\obj\Debug\Reddit-buddy.pdb
 C:\Users\tomno\documents\visual studio 2015\Projects\Reddit-buddy\Reddit-buddy\obj\Debug\Reddit_buddy.Form3.resources
 C:\Users\tomno\documents\visual studio 2015\Projects\Reddit-buddy\Reddit-buddy\obj\Debug\Reddit_buddy.Form4.resources
+C:\Users\tomno\documents\visual studio 2015\Projects\Reddit-buddy\Reddit-buddy\bin\Debug\Reddit-buddy.exe.CodeAnalysisLog.xml
+C:\Users\tomno\documents\visual studio 2015\Projects\Reddit-buddy\Reddit-buddy\bin\Debug\Reddit-buddy.exe.lastcodeanalysissucceeded
