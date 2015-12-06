@@ -52,7 +52,7 @@
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(236, 13);
             this.label2.TabIndex = 1;
-            this.label2.Text = "This is Reddit-Buddy 0.0.1 pre-alpha RC release.";
+            this.label2.Text = "This is Reddit-Buddy 0.0.2 pre-alpha RC release.";
             // 
             // label3
             // 

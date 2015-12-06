@@ -23,8 +23,6 @@ namespace Reddit_buddy
             this.MaximizeBox = false;
             this.MinimizeBox = false;
 
-            textBox1.AppendText("scriverry");
-            textBox2.AppendText("postmodum3647");
         }
 
         private void Form1_KeyDown(object sender, KeyEventArgs e)

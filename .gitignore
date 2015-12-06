@@ -13,16 +13,16 @@
 Reddit-BuddySetup/
 
 # Build results
-Reddit-BuddySetup/[Dd]ebug/
-Reddit-BuddySetup/[Dd]ebugPublic/
-Reddit-BuddySetup/[Rr]elease/
-Reddit-BuddySetup/[Rr]eleases/
-Reddit-BuddySetup/x64/
-Reddit-BuddySetup/x86/
-Reddit-BuddySetup/build/
-Reddit-BuddySetup/bld/
-Reddit-BuddySetup/[Bb]in/
-Reddit-BuddySetup/[Oo]bj/
+Reddit-buddy/[Dd]ebug/
+Reddit-buddy/[Dd]ebugPublic/
+Reddit-buddy/[Rr]elease/
+Reddit-buddy/[Rr]eleases/
+Reddit-buddy/x64/
+Reddit-buddy/x86/
+Reddit-buddy/build/
+Reddit-buddy/bld/
+Reddit-buddy/[Bb]in/
+Reddit-buddy/[Oo]bj/
 
 # Visual Studio 2015 cache/options directory
 .vs/
